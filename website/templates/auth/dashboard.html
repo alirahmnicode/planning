@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Dashboard</title>
+{% endblock head %}
+
+{% block content %}
+<div class="container">
+    <div class="content">
+        <div class="groups">
+            {% for group in goups %}
+            <div class="group">
+                <div class="group-title">
+                    <span>{{group.name}}</span>
+                    <a href="{{url_for('plan.add_new_plan', group_id=group.id)}}">افزودن برنامه</a>
+                </div>
+                <div class="items">
+                    {% for item in group.items %}
+                    <div class="item">
+                        <div class="item-title">
+                            <h2>{{item.title}}</h2>
+                            <form action="" method="post">
+                                <input type="checkbox" name="done" id="">
+                            </form>
+                        </div>
+                        <div>
+                            <p>{{item.description}}</p>
+                        </div>
+                        <div class="control">
+                            <a href="{{url_for('plan.edit_plan', plan_id=item.id)}}">ویرایش</a>
+                            <a href="{{url_for('plan.delete_plan', plan_id=item.id)}}">حذف </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    <div class="side">
+        <div>
+            <a href="{{url_for('plan.add_new_group')}}">افزودن فهرست</a>
+        </div>
+    </div>
+</div>
+{% endblock content %}

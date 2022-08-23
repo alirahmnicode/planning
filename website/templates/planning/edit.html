@@ -1,0 +1,16 @@
+{% extends 'base.html' %}\
+
+{% block head %}
+<title>ویرایش</title>
+{% endblock head %}
+
+{% block content %}
+    <div>
+        <form method="post">
+            <input type="text" name="title" id="" value="{{item.title}}">
+            <textarea name="description" id="" cols="30" rows="10" value="">{{item.description}}</textarea>
+            <input type="submit" value="ویرایش">
+        </form>
+    </div>
+{% endblock content %}
+    

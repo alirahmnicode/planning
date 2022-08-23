@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Sign Up</title>
+{% endblock head %}
+
+{% block content %}
+<div class="login-form">
+    <form method="post">
+        <h1>ساخت حساب کاربری</h1>
+        <div class="content">
+            <div class="input-field">
+                <input type="text" name="username" placeholder="نام کاربری" autocomplete="nope">
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" placeholder="رمز عبور" autocomplete="new-password">
+            </div>
+            <div class="input-field">
+                <input type="password" name="password2" placeholder="تکرار رمز عبور" autocomplete="new-password">
+            </div>
+            <div>
+                <div><span>حساب کاربری دارید؟</span><a href="{{url_for('auth.login')}}">ورود</a></div>
+            </div>
+        </div>
+        <div class="action">
+            <button>ثبت نام</button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
+    

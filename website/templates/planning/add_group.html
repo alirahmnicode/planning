@@ -1,0 +1,21 @@
+{% extends 'base.html' %}\
+
+{% block head %}
+<title>ساخت فهرست برنامه ها</title>
+{% endblock head %}
+
+{% block content %}
+<div>
+    <form method="post">
+        <input type="text" name="name" id="name">
+        <input type="submit" value="Add">
+    </form>
+</div>
+{% endblock content %}
+
+{% block js %}
+<script>
+    var today = new Date()
+    document.getElementById('name').value = today.toDateString()
+</script>
+{% endblock js %}

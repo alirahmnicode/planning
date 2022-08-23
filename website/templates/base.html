@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='nav.css')}}">
+    <link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Rubik:400,700'>
+    <link rel=stylesheet href=https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css>
+    <script src=https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js charset=utf-8></script>
+    {% block head %}
+    {% endblock head %}
+</head>
+
+<body>
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <div class="notification is-danger">
+        {% for message in messages %}
+        <div class="message">{{message}}</div> 
+        {% endfor %}
+    </div>
+    {% endif %}
+    {% endwith %}
+
+    {% include 'inc/nav.html' %}
+
+    {% block content %}
+
+    {% endblock content %}
+    
+    {% block js %}
+        
+    {% endblock js %}
+        <script src="{{url_for('static', filename='app.js')}}"></script>
+</body>
+
+</html>

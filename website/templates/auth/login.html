@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>Login</title>
+{% endblock head %}
+
+{% block content %}
+<div class="login-form">
+    <form method="post">
+        <h1>ورود به حساب کاربری</h1>
+        <div class="content">
+            <div class="input-field">
+                <input type="text" name="username" placeholder="نام کاربری">
+            </div>
+            <div class="input-field">
+                <input type="password" name="password" placeholder="رمز عبور">
+            </div>
+            <div>
+                <span>حساب کاربری ندارید؟</span><a href="{{url_for('auth.signup')}}">ثبت نام</a>
+            </div>
+        </div>
+        <div class="action">
+            <button type="submit">ورود</button>
+        </div>
+    </form>
+</div>
+{% endblock content %}
