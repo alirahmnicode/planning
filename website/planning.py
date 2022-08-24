@@ -1,4 +1,4 @@
-from flask import request, redirect, url_for, Blueprint, render_template
+from flask import request, redirect, url_for, Blueprint, render_template, jsonify
 from flask_login import current_user, login_required
 from .models import Group, Plan
 from . import db
@@ -39,10 +39,12 @@ def add_new_plan(group_id):
 @plan.post('done/<int:plan_id>/')
 def is_done(plan_id):
     item = Plan.query.get(plan_id)
-    if not item.is_done:
+    if item.is_done:
+        item.is_done = False
+    else:
         item.is_done = True
-        item.save()
-    return redirect(request.referrer)
+    item.save()
+    return jsonify(item.is_done)
 
 
 @login_required
