@@ -5,10 +5,10 @@
 {% endblock head %}
 
 {% block content %}
-    <div>
-        <form method="post">
+    <div class="form-content">
+        <form class="planning-form" method="post">
             <input type="text" name="title" id="" value="{{item.title}}">
-            <textarea name="description" id="" cols="30" rows="10" value="">{{item.description}}</textarea>
+            <textarea name="description" value="">{{item.description}}</textarea>
             <input type="submit" value="ویرایش">
         </form>
     </div>
