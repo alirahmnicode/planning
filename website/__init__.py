@@ -26,10 +26,12 @@ def create_app():
     from .views import views
     from .auth import auth
     from .planning import plan
+    from .habit import habit
 
     app.register_blueprint(views, url_prefix='/')
     app.register_blueprint(auth, url_prefix='/account')
     app.register_blueprint(plan, url_prefix='/plan/')
+    app.register_blueprint(habit, url_prefix='/habit/')
 
     return app
 
