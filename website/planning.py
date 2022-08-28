@@ -42,29 +42,29 @@ def add_new_plan(group_id):
 @login_required
 @plan.post('done/<int:plan_id>/')
 def is_done(plan_id):
+    plan = Plan.query.get(plan_id)
     if check(current_user.username, plan.user.username):
-        item = Plan.query.get(plan_id)
-        if item.is_done:
-            item.is_done = False
+        if plan.is_done:
+            plan.is_done = False
         else:
-            item.is_done = True
-        item.save()
-        return jsonify(item.is_done)
+            plan.is_done = True
+        plan.save()
+        return jsonify(plan.is_done)
 
 
 @login_required
 @plan.route('edit/<int:plan_id>/', methods=['GET', 'POST'])
 def edit_plan(plan_id):
-    item = Plan.query.get(plan_id)
+    plan = Plan.query.get(plan_id)
     if request.method == 'GET':
-        return render_template('planning/edit.html', item=item)
+        return render_template('planning/edit.html', plan=plan)
 
     if request.method == 'POST' and check(current_user.username, plan.user.username):
         title = request.form.get('title')
         description = request.form.get('description')
-        item.title = title
-        item.description = description
-        item.save()
+        plan.title = title
+        plan.description = description
+        plan.save()
         return redirect(url_for('views.dashboard'))
 
 
