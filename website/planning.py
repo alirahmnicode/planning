@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from .models import Group, Plan
 from . import db
 from website.utils.owner_check import check
+from .utils.add_habit_to_gruop import Habits
 
 plan = Blueprint('plan', __name__)
 
@@ -13,6 +14,9 @@ def add_new_group():
         name = request.form.get('name')
         new_group = Group(name=name, user_id=current_user.id)
         new_group.save()
+        # add habit to this group
+        habits = Habits(new_group.id)
+        habits.add_habit()
         return redirect(url_for('views.dashboard'))
 
     if request.method == 'GET':
