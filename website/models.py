@@ -9,6 +9,7 @@ class User(UserMixin, db.Model):
     password = db.Column(db.String(100))
     groups = db.relationship('Group', backref='user')
     items = db.relationship('Plan', backref='user')
+    habits = db.relationship('Habit', backref='user')
 
 
 class Plan(db.Model):
@@ -35,6 +36,19 @@ class Group(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     items = db.relationship('Plan', backref='group')
     date = db.Column(db.DateTime(timezone=True), default=func.now())
+
+    def save(self):
+        db.session.add(self)
+        db.session.commit()
+
+
+class Habit(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(1000))
+    description = db.Column(db.Text())
+    active = db.Column(db.Boolean(), default=True)
+    expiration = db.Column(db.DateTime())
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def save(self):
         db.session.add(self)
