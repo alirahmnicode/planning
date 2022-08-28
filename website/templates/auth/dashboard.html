@@ -12,14 +12,17 @@
             <div class="group">
                 <div class="group-title">
                     <span>{{group.name}}</span>
-                    <a href="{{url_for('plan.add_new_plan', group_id=group.id)}}">افزودن برنامه</a>
+                    <div>
+                        <a href="{{url_for('plan.add_new_plan', group_id=group.id)}}">افزودن برنامه</a>
+                        <a href="{{url_for('plan.delete_group', group_id=group.id)}}">حذف فهرست</a>
+                    </div>
                 </div>
                 <div class="items">
                     {% for item in group.items %}
                     <div class="item">
                         <div class="item-title">
                             <h2>{{item.title}}</h2>
-                            <form action="" method="post">
+                            <form method="post">
                                 {% if item.is_done %}
                                 <input class="done-plan" type="checkbox" name="done" value="{{item.id}}" checked>
                                 {% else %}
@@ -44,6 +47,25 @@
     <div class="side">
         <div>
             <a href="{{url_for('plan.add_new_group')}}">افزودن فهرست</a>
+            <div>
+                <div>
+                    <a href="{{url_for('habit.add_habit')}}">افزودن عادت روزانه</a>
+                </div>
+                <ul>
+                    {% for habit in current_user.habits %}
+                    <li>{{habit.name}} <a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">حذف</a>
+                        <a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}">ویرایش</a>
+                        <form method="post">
+                            {% if habit.active %}
+                            <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}" checked>
+                            {% else %}
+                            <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}">
+                            {% endif %}
+                        </form>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </div>
         </div>
     </div>
 </div>
@@ -52,18 +74,8 @@
 
 
 {% block js %}
-    <script>
-        
-        $('.done-plan').change(function(){
-            var url = `http://${window.location.host}/plan/done/${this.value}/?done=${true}`
-            $.ajax({
-                    url:url,
-                    type:'POST',
-                    success: (res) => {
-                        console.log(res)
-                    }
-                })
-        })
-    </script>
+<script>
+
+   
+</script>
 {% endblock js %}
-    
