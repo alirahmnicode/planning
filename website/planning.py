@@ -32,7 +32,7 @@ def delete_group(group_id):
         return redirect(url_for('views.dashboard'))
 
     if request.method == "GET":
-        return render_template('planning/delete_group.html')
+        return render_template('delete_obj.html')
 
 
 
@@ -86,7 +86,8 @@ def edit_plan(plan_id):
 def delete_plan(plan_id):
     plan = Plan.query.get(plan_id)
     if request.method == 'GET':
-        return render_template('planning/delete_plan.html')
+        return render_template('delete_obj.html')
+        
     if request.method == 'POST' and check(current_user.username, plan.user.username):
         plan.delete_obj()
         return redirect(url_for('views.dashboard'))
