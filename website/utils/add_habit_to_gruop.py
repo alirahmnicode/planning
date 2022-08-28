@@ -20,7 +20,7 @@ class Habits:
         new_plan.save() 
 
     def get_objects(self):
-        objects = Habit.query.filter_by(user_id=current_user.id)
+        objects = Habit.query.filter_by(user_id=current_user.id, active=True)
         return objects
 
     def check_date(self, obj):
