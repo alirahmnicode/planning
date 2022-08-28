@@ -24,6 +24,19 @@ def add_new_group():
 
 
 @login_required
+@plan.route('group/delete/<int:group_id>/', methods=['GET', 'POST'])
+def delete_group(group_id):
+    group = Group.query.get(group_id)
+    if request.method == 'POST' and check(current_user.username, group.user.username):
+        group.delete_obj()
+        return redirect(url_for('views.dashboard'))
+
+    if request.method == "GET":
+        return render_template('planning/delete_group.html')
+
+
+
+@login_required
 @plan.route('add/<int:group_id>/', methods=['GET', 'POST'])
 def add_new_plan(group_id):
     if request.method == 'GET':
