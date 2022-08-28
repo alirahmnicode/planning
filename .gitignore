@@ -71,6 +71,7 @@ local_settings.py
 db.sqlite3
 db.sqlite
 db.sqlite3-journal
+website/db.sqlite
 
 # Flask stuff:
 instance/
