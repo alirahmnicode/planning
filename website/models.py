@@ -37,6 +37,10 @@ class Group(db.Model):
     items = db.relationship('Plan', backref='group')
     date = db.Column(db.DateTime(timezone=True), default=func.now())
 
+    def delete_obj(self):
+        db.session.delete(self)
+        db.session.commit()
+
     def save(self):
         db.session.add(self)
         db.session.commit()
@@ -49,6 +53,10 @@ class Habit(db.Model):
     active = db.Column(db.Boolean(), default=True)
     expiration = db.Column(db.DateTime())
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+
+    def delete_obj(self):
+        db.session.delete(self)
+        db.session.commit()
 
     def save(self):
         db.session.add(self)
