@@ -42,13 +42,14 @@ def add_new_plan(group_id):
 @login_required
 @plan.post('done/<int:plan_id>/')
 def is_done(plan_id):
-    item = Plan.query.get(plan_id)
-    if item.is_done:
-        item.is_done = False
-    else:
-        item.is_done = True
-    item.save()
-    return jsonify(item.is_done)
+    if check(current_user.username, plan.user.username):
+        item = Plan.query.get(plan_id)
+        if item.is_done:
+            item.is_done = False
+        else:
+            item.is_done = True
+        item.save()
+        return jsonify(item.is_done)
 
 
 @login_required
@@ -58,7 +59,7 @@ def edit_plan(plan_id):
     if request.method == 'GET':
         return render_template('planning/edit.html', item=item)
 
-    if request.method == 'POST':
+    if request.method == 'POST' and check(current_user.username, plan.user.username):
         title = request.form.get('title')
         description = request.form.get('description')
         item.title = title
