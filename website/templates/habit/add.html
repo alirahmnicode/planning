@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>افزودن برنامه جدید</title>
+{% endblock head %}
+
+{% block content %}
+<div>
+    <form method="post">
+        <input type="text" name="name" id="" placeholder="عنوان">
+        <textarea name="description" id="" cols="30" rows="10" placeholder="توضیحات"></textarea>
+        <div>
+            <p>تکرار به مدت؟</p>
+            <select name="term" id="">
+                <option value="year" selected>یک سال</option>
+                <option value="month">یک ماه</option>
+                <option value="week">یک هفته</option>
+            </select>
+        </div>
+        <input type="submit" value="اضافه">
+    </form>
+</div>
+{% endblock content %}
