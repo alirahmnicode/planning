@@ -70,7 +70,7 @@ def edit_plan(plan_id):
 @login_required
 @plan.route('delete/<int:plan_id>/', methods=['GET', 'POST'])
 def delete_plan(plan_id):
-    item = Plan.query.get(plan_id)
+    plan = Plan.query.get(plan_id)
     if request.method == 'GET':
         return render_template('planning/delete_plan.html')
     if request.method == 'POST' and check(current_user.username, plan.user.username):
