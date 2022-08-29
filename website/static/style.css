@@ -3,10 +3,20 @@
     padding: 0;
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
+    font-family: 'Vazirmatn', sans-serif;
+}
+
+a {
+    color: #222;
+    text-decoration: none;
 }
 
 button {
     cursor: pointer;
+}
+
+li {
+    list-style-type: none;
 }
 
 /* container */
@@ -26,6 +36,33 @@ button {
 
 .side {
     flex: 30%;
+    text-align: right;
+}
+
+.side ul {
+    height: 130px;
+    overflow: hidden;
+}
+
+.side ul li {
+    display: flex;
+    justify-content: space-between;
+}
+
+.side ul>li:not(:last-child) {
+    border-bottom: 1px solid #d8d8d8;
+}
+
+.side>div {
+    margin-bottom: 10px;
+}
+
+
+.more-habit {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    cursor: pointer;
 }
 
 .groups {
@@ -55,6 +92,7 @@ button {
     color: #fff;
     text-align: right;
 }
+
 
 .item {
     padding: 10px 10px 20px 10px;
@@ -90,6 +128,10 @@ button {
 .item .control a {
     color: royalblue;
     margin-right: 10px;
+    background-color: #546FE7B8;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
 }
 
 .btn-control {
@@ -124,7 +166,6 @@ button {
     border: 1px solid #546FE7;
     padding: 5px;
     border-radius: 5px;
-    width: 100%;
 }
 
 .planning-form>input[type="submit"] {
@@ -132,6 +173,7 @@ button {
     width: 70px;
     color: #fff;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .login-form {
@@ -245,4 +287,25 @@ button {
 
 .login-form .action button:nth-child(2):hover {
     background: #3c4d6d;
+}
+
+
+@media screen and (max-width:650px) {
+    .container {
+        flex-direction: column-reverse;
+    }
+
+    .container>div {
+        margin: 20px 30px;
+    }
+}
+
+@media screen and (max-width:450px) {
+    .item>div {
+        margin: 5px 0;
+    }
+
+    .item {
+        padding: 1px 10px 10px 10px;
+    }
 }

@@ -12,16 +12,22 @@
             <div class="group">
                 <div class="group-title">
                     <span>{{group.name}}</span>
-                    <div>
-                        <a href="{{url_for('plan.add_new_plan', group_id=group.id)}}">افزودن برنامه</a>
-                        <a href="{{url_for('plan.delete_group', group_id=group.id)}}">حذف فهرست</a>
+                    <div style="display:flex;flex-wrap: wrap;">
+                        <div style="margin-left: 10px;">
+                            <a href="{{url_for('plan.add_new_plan', group_id=group.id)}}">افزودن برنامه <i
+                                    class="fa-solid fa-plus"></i></a>
+                        </div>
+                        <div style="margin-left: 10px;">
+                            <a href="{{url_for('plan.delete_group', group_id=group.id)}}">حذف فهرست <i
+                                    class="fa-solid fa-trash-can"></i></a>
+                        </div>
                     </div>
                 </div>
                 <div class="items">
                     {% for item in group.items %}
                     <div class="item">
                         <div class="item-title">
-                            <h2>{{item.title}}</h2>
+                            <h3>{{item.title}}</h3>
                             <form method="post">
                                 {% if item.is_done %}
                                 <input class="done-plan" type="checkbox" name="done" value="{{item.id}}" checked>
@@ -34,8 +40,10 @@
                             <p>{{item.description}}</p>
                         </div>
                         <div class="control">
-                            <a href="{{url_for('plan.edit_plan', plan_id=item.id)}}">ویرایش</a>
-                            <a href="{{url_for('plan.delete_plan', plan_id=item.id)}}">حذف </a>
+                            <a href="{{url_for('plan.edit_plan', plan_id=item.id)}}">ویرایش <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="{{url_for('plan.delete_plan', plan_id=item.id)}}">حذف برنامه <i
+                                    class="fa-solid fa-trash-can"></i> </a>
                         </div>
                     </div>
                     {% endfor %}
@@ -46,26 +54,29 @@
     </div>
     <div class="side">
         <div>
-            <a href="{{url_for('plan.add_new_group')}}">افزودن فهرست</a>
+            <a href="{{url_for('plan.add_new_group')}}">افزودن فهرست <i class="fa-solid fa-plus"></i></a>
+        </div>
+        <div class="habit-box">
             <div>
-                <div>
-                    <a href="{{url_for('habit.add_habit')}}">افزودن عادت روزانه</a>
-                </div>
-                <ul>
-                    {% for habit in current_user.habits %}
-                    <li>{{habit.name}} <a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">حذف</a>
-                        <a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}">ویرایش</a>
-                        <form method="post">
-                            {% if habit.active %}
-                            <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}" checked>
-                            {% else %}
-                            <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}">
-                            {% endif %}
-                        </form>
-                    </li>
-                    {% endfor %}
-                </ul>
+                <a href="{{url_for('habit.add_habit')}}">افزودن عادت روزانه <i class="fa-solid fa-plus"></i></a>
             </div>
+            <ul class="habit-list">
+                {% for habit in current_user.habits %}
+                <li><a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">
+                    <i class="fa-solid fa-trash-can"></i></a>
+                    <a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}">ویرایش</a>
+                    {{habit.name}}
+                    <form method="post">
+                        {% if habit.active %}
+                        <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}" checked>
+                        {% else %}
+                        <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}">
+                        {% endif %}
+                    </form>
+                </li>
+                {% endfor %}
+            </ul>
+            <i class="fa-solid fa-angle-down more-habit" style="display:block;" title="بیشتر"></i>
         </div>
     </div>
 </div>
@@ -76,6 +87,6 @@
 {% block js %}
 <script>
 
-   
+
 </script>
 {% endblock js %}

@@ -3,6 +3,22 @@ $(".menu-toggle-btn").click(function () {
     $(".navigation-menu").toggleClass("active");
 });
 
+
+var moreBtn = $('.more-habit')
+var habitList = $('.habit-list')
+var open = false
+moreBtn.click(function() {
+    if(!open) {
+        habitList.css('height', '100%')
+        moreBtn.css('rotate', '180deg')
+        open = true
+    } else {
+        habitList.css('height', '130px')
+        moreBtn.css('rotate', '0deg')
+        open = false
+    }
+})
+
 function request(url, method) {
     url = url
     $.ajax({
