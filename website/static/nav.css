@@ -32,7 +32,6 @@ header {
     float: right;
     display: flex;
     align-items: center;
-    min-height: 90px;
 }
 
 .navigation-menu a {
