@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, url_for
 from flask_login import current_user, login_required
+from sqlalchemy import desc
 from .models import Group
 from . import db
 
@@ -15,5 +16,5 @@ def home():
 @views.get('/dashboard/')
 @login_required
 def dashboard():
-    goups = Group.query.filter_by(user=current_user)
+    goups = Group.query.filter_by(user=current_user).order_by(desc(Group.date))
     return render_template('auth/dashboard.html', goups=goups)
