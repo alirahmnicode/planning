@@ -7,6 +7,9 @@ $(".menu-toggle-btn").click(function () {
 var moreBtn = $('.more-habit')
 var habitList = $('.habit-list')
 var open = false
+if (habitList.children().length > 5) {
+    habitList.css('height', '130px')
+}
 moreBtn.click(function() {
     if(!open) {
         habitList.css('height', '100%')
@@ -40,3 +43,11 @@ $('.active-habit').change(function () {
     var url = `http://${window.location.host}/habit/active/${this.value}/`
     request(url, 'post')
 })
+
+
+// message
+$(".close-message").click(function () {
+    $(this)
+        .parent(".alert")
+        .fadeOut();
+});

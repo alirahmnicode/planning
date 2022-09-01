@@ -40,8 +40,8 @@ li {
 }
 
 .side ul {
-    height: 130px;
     overflow: hidden;
+    margin-top: 10px;
 }
 
 .side ul li {
@@ -175,6 +175,12 @@ li {
     cursor: pointer;
 }
 
+.form-box {
+    display: flex;
+    justify-content: center;
+    margin: 50px;
+}
+
 .login-form {
     background: #fff;
     width: 500px;
@@ -296,6 +302,16 @@ li {
 
     .container>div {
         margin: 20px 30px;
+    }
+}
+
+@media screen and (max-width:500px) {
+    .login-form {
+        width: 100%;
+    }
+
+    .container>div {
+        margin: 20px 10px;
     }
 }
 

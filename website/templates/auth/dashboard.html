@@ -48,7 +48,10 @@
                     </div>
                     {% endfor %}
                 </div>
-                <i class="fa-solid fa-angle-down more-list" style="display: block; cursor: pointer; text-align: center; font-size: 24px;" title="بیشتر"></i>
+                {% if group.items|length > 0 %}
+                <i class="fa-solid fa-angle-down more-list"
+                    style="display: block; cursor: pointer; text-align: center; font-size: 24px;" title="بیشتر"></i>
+                {% endif %}
             </div>
             {% endfor %}
         </div>
@@ -64,7 +67,7 @@
             <ul class="habit-list">
                 {% for habit in current_user.habits %}
                 <li><a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">
-                    <i class="fa-solid fa-trash-can"></i></a>
+                        <i class="fa-solid fa-trash-can"></i></a>
                     <a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}">ویرایش</a>
                     {{habit.name}}
                     <form method="post">
@@ -76,45 +79,47 @@
                     </form>
                 </li>
                 {% endfor %}
+
             </ul>
+            {% if current_user.habits|length > 5 %}
             <i class="fa-solid fa-angle-down more-habit" style="display:block;" title="بیشتر"></i>
+            {% endif %}
         </div>
     </div>
 </div>
 
 {% endblock content %}
 
-
 {% block js %}
 <script>
-var items = $('.items')
+    var items = $('.items')
 
-for(let i=0; i<items.length; i++) {
-    if (i!=0) {
-        items[i].style.height = '0'
-        items[i].style.overflow = 'hidden'
-    } else {
-        items[i].style.height = '100%'
-        items[i].style.overflow = 'hidden'
+    for (let i = 0; i < items.length; i++) {
+        if (i != 0) {
+            items[i].style.height = '0'
+            items[i].style.overflow = 'hidden'
+        } else {
+            items[i].style.height = '100%'
+            items[i].style.overflow = 'hidden'
+            $('.more-list')[0].style.rotate = '180deg'
+        }
     }
-}
 
-var moreListBtn = $('.more-list')
-moreListBtn.click(function() {
-    var thisList = $(this).parent().children()[1]
-    if (thisList.style.height == '100%') {
-        // close
-        thisList.style.height = '0'
-        thisList.style.overflow = 'hidden'
-        this.style.rotate = '0deg'
+    var moreListBtn = $('.more-list')
+    moreListBtn.click(function () {
+        var thisList = $(this).parent().children()[1]
+        if (thisList.style.height == '100%') {
+            // close
+            thisList.style.height = '0'
+            thisList.style.overflow = 'hidden'
+            this.style.rotate = '0deg'
 
-    } else if(thisList.style.height == '0px') {
-        // open
-        thisList.style.height = '100%'
-        thisList.style.overflow = 'hidden'
-        this.style.rotate = '180deg'
-
-    }
-})
+        } else if (thisList.style.height == '0px') {
+            // open
+            thisList.style.height = '100%'
+            thisList.style.overflow = 'hidden'
+            this.style.rotate = '180deg'
+        }
+    })
 </script>
 {% endblock js %}
