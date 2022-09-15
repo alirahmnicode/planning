@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>افزودن برنامه ثابت</title>
+{% endblock head %}
+
+{% block content %}
+<div class="form-box">
+    <form method="post" class="planning-form">
+        <input type="text" name="name" placeholder="عنوان">
+        <textarea name="description" cols="30" rows="10" placeholder="توضیحات"></textarea>
+        <label for="start-time">Choose a time for start plan:</label>
+        <input type="text" id="start-time" name="start">
+        <label for="finish-time">Choose a time for finish the plan:</label>
+        <input type="text" id="finish-time" name="end">
+        <input type="submit" value="اضافه">
+    </form>
+</div>
+{% endblock content %}
