@@ -10,7 +10,6 @@ class User(UserMixin, db.Model):
     groups = db.relationship('Group', backref='user')
     items = db.relationship('Plan', backref='user')
     habits = db.relationship('Habit', backref='user')
-    fixed_plan = db.relationship('FixedPlan', backref='user')
 
 
 class Plan(db.Model):
@@ -53,22 +52,6 @@ class Habit(db.Model):
     description = db.Column(db.Text())
     active = db.Column(db.Boolean(), default=True)
     expiration = db.Column(db.DateTime())
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-
-    def delete_obj(self):
-        db.session.delete(self)
-        db.session.commit()
-
-    def save(self):
-        db.session.add(self)
-        db.session.commit()
-
-
-class FixedPlan(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(1000))
-    description = db.Column(db.Text())
-    time_to_do = db.Column(db.String(1000))
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
 
     def delete_obj(self):
