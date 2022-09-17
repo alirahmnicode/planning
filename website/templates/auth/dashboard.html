@@ -23,6 +23,9 @@
                         </div>
                     </div>
                 </div>
+                <div class="progress-bar">
+                    <div class="bar"><span>0%</span></div>
+                </div>
                 <div class="items">
                     {% for item in group.items %}
                     <div class="item">
@@ -92,22 +95,22 @@
 
 {% block js %}
 <script>
-    var items = $('.items')
+    var itemsBox = $('.items')
 
-    for (let i = 0; i < items.length; i++) {
+    for (let i = 0; i < itemsBox.length; i++) {
         if (i != 0) {
-            items[i].style.height = '0'
-            items[i].style.overflow = 'hidden'
+            itemsBox[i].style.height = '0'
+            itemsBox[i].style.overflow = 'hidden'
         } else {
-            items[i].style.height = '100%'
-            items[i].style.overflow = 'hidden'
+            itemsBox[i].style.height = '100%'
+            itemsBox[i].style.overflow = 'hidden'
             $('.more-list')[0].style.rotate = '180deg'
         }
     }
 
     var moreListBtn = $('.more-list')
     moreListBtn.click(function () {
-        var thisList = $(this).parent().children()[1]
+        var thisList = $(this).parent().children('.items')[0]
         if (thisList.style.height == '100%') {
             // close
             thisList.style.height = '0'
@@ -121,5 +124,44 @@
             this.style.rotate = '180deg'
         }
     })
+
+    // progress bar
+    for (let i = 0; i < itemsBox.length; i++) {
+        var itemCount = itemsBox[i].children.length
+        if (itemCount > 0) {
+            var is_done = 0
+            var progressBar = $(itemsBox[i]).parent().children(".progress-bar").children('.bar')[0]
+            // 
+            var items = $(itemsBox[i]).children('.item')
+            for (let i = 0; i < items.length; i++) {
+                var checked = $(items[i]).children('.item-title').children('form').children('input')[0].checked
+                if (checked) {
+                    is_done++
+                }
+            }
+            progress(itemCount, is_done, progressBar)
+        }
+
+    }
+    function progress(count, is_done, progressBar) {
+        var w = 0;
+        var widthBar = (is_done / count) * 100
+        $(progressBar).children('span')[0].textContent = `${widthBar}%`
+        if (w == 0) {
+            w = 1;
+            var bars = $(".bar");
+            var width = 1;
+            var id = setInterval(frame, 20);
+            function frame() {
+                if (width >= widthBar) {
+                    clearInterval(id);
+                    w = 0;
+                } else {
+                    width++;
+                    progressBar.style.width = width + "%";
+                }
+            }
+        }
+    }
 </script>
 {% endblock js %}

@@ -295,6 +295,21 @@ li {
 }
 
 
+.progress-bar {
+    width: 100%;
+    background-color: #dce0ea;
+}
+
+.bar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    width: 5%;
+    height: 30px;
+    background-color: #1f3060;
+}
+
 @media screen and (max-width:650px) {
     .container {
         flex-direction: column-reverse;
