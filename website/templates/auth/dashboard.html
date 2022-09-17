@@ -145,7 +145,7 @@
     }
     function progress(count, is_done, progressBar) {
         var w = 0;
-        var widthBar = (is_done / count) * 100
+        var widthBar = parseInt((is_done / count) * 100)
         $(progressBar).children('span')[0].textContent = `${widthBar}%`
         if (w == 0) {
             w = 1;
