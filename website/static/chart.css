@@ -1,0 +1,20 @@
+.weekly-chart {
+    display: flex;
+    justify-content: space-between;
+    margin: 30px 50px;
+}
+
+.chart-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.chart-btn button {
+    background-color: #546FE7B8;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    margin: 0 5px;
+}

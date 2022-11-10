@@ -8,17 +8,17 @@
 <div class="container">
     <div class="content">
         <div class="groups">
-            {% for group in goups %}
+            <!-- today to do list -->
             <div class="group">
                 <div class="group-title">
-                    <span>{{group.name}}</span>
+                    <span>{{today_list.name}}</span>
                     <div style="display:flex;flex-wrap: wrap;">
                         <div style="margin-left: 10px;">
-                            <a href="{{url_for('plan.add_new_plan', group_id=group.id)}}">افزودن برنامه <i
+                            <a href="{{url_for('plan.add_new_plan', group_id=today_list.id)}}">افزودن برنامه <i
                                     class="fa-solid fa-plus"></i></a>
                         </div>
                         <div style="margin-left: 10px;">
-                            <a href="{{url_for('plan.delete_group', group_id=group.id)}}">حذف فهرست <i
+                            <a href="{{url_for('plan.delete_group', group_id=today_list.id)}}">حذف فهرست <i
                                     class="fa-solid fa-trash-can"></i></a>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                     <div class="bar"><span>0%</span></div>
                 </div>
                 <div class="items">
-                    {% for item in group.items %}
+                    {% for item in today_list.items %}
                     <div class="item">
                         <div class="item-title">
                             <h3>{{item.title}}</h3>
@@ -51,17 +51,48 @@
                     </div>
                     {% endfor %}
                 </div>
-                {% if group.items|length > 0 %}
+                {% if today_list.items|length > 0 %}
                 <i class="fa-solid fa-angle-down more-list"
                     style="display: block; cursor: pointer; text-align: center; font-size: 24px;" title="بیشتر"></i>
                 {% endif %}
             </div>
-            {% endfor %}
+            <!-- recent to do lists -->
+            <div class="lists">
+                {% for list in groups %}
+                {% if list.date.strftime('%Y-%m-%d') != today %}
+                <div class="recent-list">
+                    <div>
+                        <div>{{list.name}}</div>
+                        <div></div>
+                    </div>
+                    <div class="r-list-items">
+                        {% for item in list.items %}
+                        <div class="r-list-item">
+                            <div class="item-title">
+                                <h3>{{item.title}}</h3>
+                            </div>
+                            <div>
+                                {% if item.is_done %}
+                                <i class="fa-solid fa-check"></i>
+                                {% else %}
+                                <i class="fa-solid fa-xmark"></i>
+                                {% endif %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </div>
         </div>
     </div>
     <div class="side">
         <div>
             <a href="{{url_for('plan.add_new_group')}}">افزودن فهرست <i class="fa-solid fa-plus"></i></a>
+        </div>
+        <div>
+            <a href="{{url_for('views.report')}}">گزارش عملکرد</a>
         </div>
         <div class="habit-box">
             <div>

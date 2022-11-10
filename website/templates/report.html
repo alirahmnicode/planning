@@ -1,0 +1,105 @@
+{% extends 'base.html' %}
+
+{% block head %}
+<title>گزارش عملکرد</title>
+<link rel="stylesheet" href="{{url_for('static', filename='chart.css')}}">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1/dist/chart.min.js"></script>
+{% endblock head %}
+
+{% block content %}
+<div class="weekly-chart">
+    <div style="width: 450px;" id="weekly-chart">
+        <canvas id="myChart" width="400" height="400"></canvas>
+    </div>
+    <div class="weeks">
+        <div id="week-date"></div>
+        <div class="chart-btn">
+            <div id="next-w">
+                <button onclick="weeklyChart(-1)">Next Week</button>
+            </div>
+            <div id="per-w">
+                <button onclick="weeklyChart(1)">Pervious Week</button>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+
+    // get weekly data
+    const getWeeklyData = async (n = 1, callback) => {
+        const weeklyData = await fetch(`http://localhost:5000/chart/week/?n=${n}`)
+        const weeklyJson = await weeklyData.json()
+        return weeklyJson
+    }
+    var weekN = 0
+    var nextW = document.getElementById('next-w')
+    var perW = document.getElementById('per-w')
+    const weeklyChart = async (n = 1) => {
+        // get data
+        weekN += n
+        var jsonData = await getWeeklyData(weekN)
+        if (weekN == 1) {
+            nextW.style.display = 'none'
+            perW.style.display = 'block'
+        } else if (weekN == parseInt(jsonData.weeks_count)) {
+            nextW.style.display = 'block'
+            perW.style.display = 'none'
+        } else {
+            nextW.style.display = 'block'
+            perW.style.display = 'block'
+        }
+        var weeklyData = jsonData.weekly_data
+        // set new date
+        labels = []
+        data = []
+        const startOfWeek = weeklyData[0]['day']
+        const endOftWeek = weeklyData[weeklyData.length - 1]['day']
+        document.getElementById('week-date').textContent = `${startOfWeek} - ${endOftWeek}`
+        weeklyData.forEach(element => {
+            labels.push(element['day'])
+            data.push(element['percent'])
+        });
+        var weekChartBox = document.getElementById('weekly-chart')
+        weekChartBox.innerHTML = ''
+        const newCtx = createCtx()
+        weekChartBox.appendChild(newCtx)
+        var ctx = newCtx.getContext('2d')
+        createChart(ctx, data, labels)
+    }
+    // first week
+    weeklyChart()
+
+    function createCtx() {
+        const newCtx = document.createElement('canvas')
+        newCtx.setAttribute('id', `week${weekN}`)
+        newCtx.setAttribute('width', '400')
+        newCtx.setAttribute('height', '400')
+        return newCtx
+    }
+
+    function createChart(ctx, data, labels) {
+        new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: labels,
+                datasets: [{
+                    label: false,
+                    data: data,
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                    ],
+                    borderWidth: 2
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    }
+
+</script>
+{% endblock content %}
