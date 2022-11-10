@@ -65,6 +65,41 @@ li {
     cursor: pointer;
 }
 
+.lists {
+    width: 100%;
+}
+
+.recent-list {
+    display: flex;
+    align-items: center;
+}
+
+.recent-list>div:first-child {
+    width: 200px;
+}
+
+.recent-list>div:last-child {
+    display: flex;
+    align-items: flex-start;
+    margin-left: 20px;
+}
+
+.recent-list:nth-child(even) {
+    background-color: #dce0ea;
+}
+
+.recent-list .item-title {
+    width: 100%;
+}
+
+.r-list-items {
+    width: 100%;
+}
+
+.r-list-item {
+    width: 100px;
+    margin-right: 10px;
+}
 .groups {
     display: flex;
     flex-direction: column;
