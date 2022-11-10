@@ -3,12 +3,13 @@
         <h1 class="logo">Planning</h1>
         <i class="menu-toggle-btn fas fa-bars"></i>
         <nav class=navigation-menu>
-            <a href='/'><i class="fas fa-home home"></i> Dashboard</a>
+            <a href='/'><i class="fa-solid fa-house"></i></i> داشبورد</a>
             {% if current_user.is_authenticated %}
-            <a href="{{ url_for('auth.logout') }}"><i class="fas fa-lock" aria-hidden=true></i>logout
+            <a href="{{ url_for('auth.logout') }}"><i class="fas fa-lock" aria-hidden=true></i>خروج
             </a>
+            <a href="{{url_for('views.report')}}"><i class="fa-solid fa-chart-simple"></i>گزارش عملکرد</a>
             {% else %}
-            <a href="{{ url_for('auth.login') }}" class="aj_btn"> 
+            <a href="{{ url_for('auth.login') }}" class="aj_btn">
                 <i class="fas fa-lock" aria-hidden=true></i>
                 LOGIN</a>
             {% endif %}
