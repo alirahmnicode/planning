@@ -58,6 +58,23 @@ li {
 }
 
 
+/* habits table */
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+
+td,
+th {
+    border: 1px solid #dddddd;
+    text-align: center;
+    padding: 8px;
+}
+
+tr:nth-child(even) {
+    background-color: #dddddd;
+}
+
 .more-habit {
     display: block;
     text-align: center;
@@ -72,6 +89,8 @@ li {
 .recent-list {
     display: flex;
     align-items: center;
+    overflow-x: scroll;
+    padding: 5px;
 }
 
 .recent-list>div:first-child {
@@ -82,6 +101,10 @@ li {
     display: flex;
     align-items: flex-start;
     margin-left: 20px;
+}
+
+.list-name {
+    width: 130px;
 }
 
 .recent-list:nth-child(even) {
@@ -100,6 +123,7 @@ li {
     width: 100px;
     margin-right: 10px;
 }
+
 .groups {
     display: flex;
     flex-direction: column;

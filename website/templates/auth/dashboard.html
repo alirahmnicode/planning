@@ -62,7 +62,7 @@
                 {% if list.date.strftime('%Y-%m-%d') != today %}
                 <div class="recent-list">
                     <div>
-                        <div>{{list.name}}</div>
+                        <div class="list-name">{{list.name}}</div>
                         <div></div>
                     </div>
                     <div class="r-list-items">
@@ -91,30 +91,35 @@
         <div>
             <a href="{{url_for('plan.add_new_group')}}">افزودن فهرست <i class="fa-solid fa-plus"></i></a>
         </div>
-        <div class="habit-box">
+        <div>
             <div>
                 <a href="{{url_for('habit.add_habit')}}">افزودن عادت روزانه <i class="fa-solid fa-plus"></i></a>
             </div>
-            <ul class="habit-list">
+            <table>
+                <tr>
+                    <th>حذف</th>
+                    <th>ویرایش</th>
+                    <th>عنوان</th>
+                    <th>وضعیت</th>
+                </tr>
                 {% for habit in current_user.habits %}
-                <li><a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">
-                        <i class="fa-solid fa-trash-can"></i></a>
-                    <a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}">ویرایش</a>
-                    {{habit.name}}
-                    <form method="post">
+                <tr>
+                    <td>
+                        <a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">
+                            <i class="fa-solid fa-trash-can"></i></a>
+                    </td>
+                    <td><a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td>{{habit.name}}</td>
+                    <td>
                         {% if habit.active %}
-                        <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}" checked>
+                        <i class="fa-solid fa-check"></i>
                         {% else %}
-                        <input class="active-habit" type="checkbox" name="done" value="{{habit.id}}">
+                        <i class="fa-solid fa-xmark"></i>
                         {% endif %}
-                    </form>
-                </li>
+                    </td>
+                </tr>
                 {% endfor %}
-
-            </ul>
-            {% if current_user.habits|length > 5 %}
-            <i class="fa-solid fa-angle-down more-habit" style="display:block;" title="بیشتر"></i>
-            {% endif %}
+            </table>
         </div>
     </div>
 </div>

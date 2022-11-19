@@ -18,3 +18,16 @@
     border: none;
     margin: 0 5px;
 }
+
+@media screen and (max-width:800px) {
+    .weekly-chart {
+        margin: 30px 10px;
+    }
+}
+
+@media screen and (max-width:700px) {
+    .weekly-chart {
+       flex-direction: column;
+       align-items: center;
+    }
+}
