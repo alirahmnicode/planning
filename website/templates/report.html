@@ -24,10 +24,11 @@
     </div>
 </div>
 <script>
-
+    const origin = window.location.origin
     // get weekly data
     const getWeeklyData = async (n = 1, callback) => {
-        const weeklyData = await fetch(`http://localhost:5000/chart/week/?n=${n}`)
+        const url = `${origin}/chart/week/?n=${n}`
+        const weeklyData = await fetch(url)
         const weeklyJson = await weeklyData.json()
         return weeklyJson
     }
