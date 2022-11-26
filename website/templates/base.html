@@ -35,34 +35,6 @@
     {% endblock js %}
 
     <script src="{{url_for('static', filename='app.js')}}"></script>
-    <script>
-        // full screen
-        var elem = document.documentElement;
-        var openFull = false
-
-        /* View in fullscreen */
-        function openFullscreen() {
-            if (!openFull) {
-                if (elem.requestFullscreen) {
-                    elem.requestFullscreen();
-                } else if (elem.webkitRequestFullscreen) { /* Safari */
-                    elem.webkitRequestFullscreen();
-                } else if (elem.msRequestFullscreen) { /* IE11 */
-                    elem.msRequestFullscreen();
-                }
-                openFull = true
-            } else {
-                if (document.exitFullscreen) {
-                    document.exitFullscreen();
-                } else if (document.webkitExitFullscreen) { /* Safari */
-                    document.webkitExitFullscreen();
-                } else if (document.msExitFullscreen) { /* IE11 */
-                    document.msExitFullscreen();
-                }
-                openFull = false
-            }
-        }
-    </script>
 </body>
 
 </html>
