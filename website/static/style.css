@@ -99,7 +99,7 @@ tr:nth-child(even) {
 
 .recent-list>div:last-child {
     display: flex;
-    align-items: flex-start;
+    align-items: initial;
     margin-left: 20px;
 }
 
@@ -121,9 +121,22 @@ tr:nth-child(even) {
 
 .r-list-item {
     width: 100px;
-    margin-right: 10px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
 }
 
+
+.r-list-item:not(:last-child) {
+    border-right: 1px solid #c1bdbd;
+}
+
+.item-title h3 {
+    width: 100px;
+    text-align: center;
+}
 .groups {
     display: flex;
     flex-direction: column;
