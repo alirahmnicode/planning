@@ -2,13 +2,15 @@
     <div class="group-title">
         <span>{{today_list.name}}</span>
         <div style="display:flex;flex-wrap: wrap;">
-            <div style="margin-left: 10px;">
-                <a href="{{url_for('plan.add_new_plan', group_id=today_list.id)}}">افزودن برنامه <i
-                        class="fa-solid fa-plus"></i></a>
+            <div style="margin-left: 10px;" class="icon-link-title">
+                <a href="{{url_for('plan.add_new_plan', group_id=today_list.id)}}">افزودن برنامه
+                </a>
+                <img class="icon icon-w" src="https://img.icons8.com/ios/50/null/plus-2-math.png"/>
             </div>
-            <div style="margin-left: 10px;">
-                <a href="{{url_for('plan.delete_group', group_id=today_list.id)}}">حذف فهرست <i
-                        class="fa-solid fa-trash-can"></i></a>
+            <div style="margin-left: 10px;" class="icon-link-title">
+                <a href="{{url_for('plan.delete_group', group_id=today_list.id)}}">حذف فهرست
+                </a>
+                <img class="icon icon-w" src="https://img.icons8.com/ios/50/null/delete-property.png"/>
             </div>
         </div>
     </div>
@@ -32,10 +34,11 @@
                 <p>{{item.description}}</p>
             </div>
             <div class="control">
-                <a href="{{url_for('plan.edit_plan', plan_id=item.id)}}">ویرایش <i
-                        class="fa-solid fa-pen-to-square"></i></a>
-                <a href="{{url_for('plan.delete_plan', plan_id=item.id)}}">حذف برنامه <i
-                        class="fa-solid fa-trash-can"></i> </a>
+                <a href="{{url_for('plan.edit_plan', plan_id=item.id)}}"> 
+                    <img class="icon icon-button" src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-edit-social-media-ui-tanah-basah-glyph-tanah-basah.png"/>
+                </a>
+                <a href="{{url_for('plan.delete_plan', plan_id=item.id)}}">
+                    <img class="icon icon-button" src="https://img.icons8.com/material-rounded/24/null/delete-forever.png"/> </a>
             </div>
         </div>
         {% endfor %}

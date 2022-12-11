@@ -37,15 +37,18 @@
                 <tr>
                     <td>
                         <a href="{{url_for('habit.delete_habit', habit_id=habit.id)}}">
-                            <i class="fa-solid fa-trash-can"></i></a>
+                            <img src="https://img.icons8.com/material-rounded/24/null/delete-forever.png" /></a>
                     </td>
-                    <td><a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="{{url_for('habit.edit_habit', habit_id=habit.id)}}">
+                            <img class="icon"
+                                src="https://img.icons8.com/external-tanah-basah-glyph-tanah-basah/48/null/external-edit-social-media-ui-tanah-basah-glyph-tanah-basah.png" />
+                        </a></td>
                     <td>{{habit.name}}</td>
                     <td>
                         {% if habit.active %}
-                        <i class="fa-solid fa-check"></i>
+                        فعال
                         {% else %}
-                        <i class="fa-solid fa-xmark"></i>
+                        غیرفعال
                         {% endif %}
                     </td>
                 </tr>
