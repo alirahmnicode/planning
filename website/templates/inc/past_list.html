@@ -1,0 +1,28 @@
+<div class="lists">
+    {% for list in groups %}
+    {% if list.date.strftime('%Y-%m-%d') != today %}
+    <div class="recent-list">
+        <div>
+            <div class="list-name">{{list.name}}</div>
+            <div></div>
+        </div>
+        <div class="r-list-items">
+            {% for item in list.items %}
+            <div class="r-list-item">
+                <div class="item-title">
+                    <h3>{{item.title}}</h3>
+                </div>
+                <div>
+                    {% if item.is_done %}
+                    <i class="fa-solid fa-check"></i>
+                    {% else %}
+                    <i class="fa-solid fa-xmark"></i>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+    {% endfor %}
+</div>

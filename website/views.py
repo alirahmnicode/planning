@@ -19,7 +19,10 @@ def home():
 @login_required
 def dashboard():
     groups = Group.query.filter_by(user=current_user).order_by(desc(Group.date))
-    today_list = groups[0]
+    if len(list(groups)) > 0:
+        today_list = groups[0]
+    else:
+        today_list = None
     return render_template('auth/dashboard.html', groups=groups, today_list=today_list)
 
 
